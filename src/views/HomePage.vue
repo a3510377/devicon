@@ -8,13 +8,18 @@ getDeviconData().then((d) => Object.assign(deviconData, d));
 
 <template>
   <div class="icons">
-    <div v-for="icon in deviconData" :key="icon.name" class="icon">
+    <button
+      v-for="icon in deviconData"
+      :key="icon.name"
+      class="icon"
+      role="option"
+    >
       <i
         class="cbp-ig-icon"
         :class="{ [`devicon-${icon.name}-${icon.base}`]: true }"
       ></i>
       <h3 v-text="icon.name"></h3>
-    </div>
+    </button>
   </div>
 </template>
 
@@ -30,12 +35,25 @@ getDeviconData().then((d) => Object.assign(deviconData, d));
 
   .icon {
     width: 120px;
-    height: 100px;
+    height: 120px;
     text-align: center;
     word-break: break-all;
+    background-color: transparent;
+    border: 0;
+    border-radius: 5px;
+    user-select: none;
 
     &:hover {
-      background-color: rgb(232 234 237 / 4%);
+      background-color: rgb(232 234 237 / 75.5%);
+    }
+
+    &:focus {
+      background-color: #0000001b;
+      outline: none;
+    }
+
+    h3 {
+      margin-top: 20px;
     }
   }
 
