@@ -62,5 +62,10 @@ getDeviconData().then((d) => Object.assign(deviconData, d));
     font-size: 48px;
     transition: transform 0.2s;
   }
+
+  /* fix color */
+  .devicon-yunohost-plain.colored {
+    color: #7f7f7f;
+  }
 }
 </style>
