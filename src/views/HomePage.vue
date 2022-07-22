@@ -15,7 +15,7 @@ getDeviconData().then((d) => Object.assign(deviconData, d));
       role="option"
     >
       <i
-        class="cbp-ig-icon"
+        class="cbp-ig-icon colored"
         :class="{ [`devicon-${icon.name}-${icon.base}`]: true }"
       ></i>
       <h3 v-text="icon.name"></h3>
