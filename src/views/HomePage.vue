@@ -1,84 +1,48 @@
 <script setup lang="ts">
-import { defineAsyncComponent } from 'vue';
-import { useAppStore } from '@/stores/modules/app';
+import { reactive } from 'vue';
+import { getDeviconData, deviconDataType } from '@/utils/data';
 
-const GithubIcons = defineAsyncComponent(
-  () => import('@/components/home/GithubIcons.vue')
-);
-
-const appStore = useAppStore();
-
-const technologies = [
-  'vue',
-  'typescript',
-  'vue-router',
-  'pinia',
-  'eslint',
-  'style-lint',
-  'prettier',
-];
+const deviconData = reactive<deviconDataType[]>([]);
+getDeviconData().then((d) => Object.assign(deviconData, d));
 </script>
 
 <template>
-  <div class="home-page">
-    <SvgIcon name="vueLogo" class="vue-logo" />
-    <ul class="technologies">
-      <!-- eslint-disable-next-line vue/require-v-for-key -->
-      <li v-for="technologie in technologies" v-once v-text="technologie" />
-    </ul>
-    <button @click="appStore.addCount()">count: {{ appStore.getCount }}</button>
-    <hr />
-    <div class="icons">
-      <GithubIcons />
+  <div class="icons">
+    <div v-for="icon in deviconData" :key="icon.name" class="icon">
+      <i
+        class="cbp-ig-icon"
+        :class="{ [`devicon-${icon.name}-${icon.base}`]: true }"
+      ></i>
+      <h3 v-text="icon.name"></h3>
     </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
-.home-page {
-  display: flex;
-  width: 100%;
-  height: 100%;
-  align-items: center;
-  flex-direction: column;
+.icons {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 120px);
+  column-gap: 16px;
+  row-gap: 24px;
+  justify-items: center;
   justify-content: center;
+  flex-wrap: wrap;
 
-  .vue-logo {
-    width: 14em;
-    height: 14em;
-    @media all and (max-width: 500px) {
-      width: 8em;
-      height: 8em;
+  .icon {
+    width: 120px;
+    height: 100px;
+    text-align: center;
+    word-break: break-all;
+
+    &:hover {
+      background-color: rgb(232 234 237 / 4%);
     }
   }
 
-  hr {
-    width: 80%;
-    margin: 25px 0;
-  }
-
-  .technologies {
-    display: flex;
-    margin: 20px 0;
-    font-size: 20px;
-    list-style-type: none;
-
-    li {
-      margin: 0 4px;
-    }
-    @media all and (max-width: 500px) {
-      flex-direction: column;
-      list-style-type: disc;
-    }
-  }
-
-  .icons {
-    display: flex;
-
-    :deep(svg) {
-      width: 2.6em;
-      height: 2.6em;
-    }
+  .cbp-ig-icon {
+    display: block;
+    font-size: 48px;
+    transition: transform 0.2s;
   }
 }
 </style>

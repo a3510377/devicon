@@ -1,6 +1,6 @@
 {
   "editor.tabSize": 2,
-  "cSpell.words": ["brotli", "stylelint", "technologie"],
+  "cSpell.words": ["brotli", "devicon", "stylelint", "technologie"],
   "editor.codeActionsOnSave": {
     "source.fixAll": true,
     "source.fixAll.eslint": true,
