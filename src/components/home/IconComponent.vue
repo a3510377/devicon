@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { defineProps } from 'vue';
-
 import { deviconDataType } from '@/utils/data';
 
 defineProps<{ icon: deviconDataType }>();

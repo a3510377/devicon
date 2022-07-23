@@ -2,7 +2,8 @@
 import { reactive } from 'vue';
 
 import { getDeviconData, deviconDataType } from '@/utils/data';
-import IconsComponents from '@/components/home/IconsComponent.vue';
+import IconsComponent from '@/components/home/IconsComponent.vue';
+import IconInfo from '@/components/home/IconInfo.vue';
 
 const deviconData = reactive<deviconDataType[]>([]);
 getDeviconData().then((d) => Object.assign(deviconData, d));
@@ -10,8 +11,9 @@ getDeviconData().then((d) => Object.assign(deviconData, d));
 
 <template>
   <Suspense>
-    <IconsComponents />
+    <IconsComponent />
   </Suspense>
+  <IconInfo />
 </template>
 
 <style lang="scss" scoped></style>

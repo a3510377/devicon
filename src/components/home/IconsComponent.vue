@@ -1,24 +1,24 @@
 <script setup lang="ts">
 import { reactive } from 'vue';
 
-import { getDeviconData, deviconDataType } from '@/utils/data';
+import { getDeviconData } from '@/utils/data';
+import { useAppStore } from '@/stores/modules/app';
 
 import IconsComponent from './IconComponent.vue';
 
-const deviconData = reactive<deviconDataType[]>(await getDeviconData());
+const appStore = useAppStore();
+const deviconData = reactive(await getDeviconData());
 
-const iconClick = (name: string) => {
-  console.log(name);
-};
+const iconClick = (name: string) => (appStore.focusIcon = deviconData[name]);
 </script>
 
 <template>
   <div class="icons">
     <IconsComponent
-      v-for="icon in deviconData"
-      :key="icon.name"
+      v-for="(icon, name) in deviconData"
+      :key="name"
       :icon="icon"
-      @click="iconClick(icon.name)"
+      @click="iconClick(name)"
     />
   </div>
 </template>

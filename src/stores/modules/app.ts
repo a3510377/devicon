@@ -1,26 +1,16 @@
 import { defineStore } from 'pinia';
+import { deviconDataType } from '@/utils/data';
 
 export interface AppStoreType {
-  /** count data */
-  count: number;
+  focusIcon?: deviconDataType;
 }
 
 export const useAppStore = defineStore({
   id: 'app',
-  state: (): AppStoreType => ({
-    count: 0,
-  }),
+  state: (): AppStoreType => ({}),
   getters: {
-    /** get count */
-    getCount(): number {
-      return this.count;
-    },
-  },
-  actions: {
-    /** add count */
-    addCount(count?: number): void {
-      if (count === undefined) this.count += 1;
-      else this.count += count;
+    getFocusIcon(): deviconDataType | undefined {
+      return this.focusIcon;
     },
   },
 });
