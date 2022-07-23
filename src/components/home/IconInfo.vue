@@ -1,13 +1,12 @@
 <script lang="ts" setup>
-import { onMounted, computed, ref } from 'vue';
-import { useClipboard, templateRef } from '@vueuse/core';
+import { computed, ref, watch } from 'vue';
+import { templateRef } from '@vueuse/core';
 
 import { useAppStore } from '@/stores/modules/app';
 import { getSvgURL, getDeviconSvg } from '@/utils/data';
 
 const appStore = useAppStore();
 
-const { copy, copied } = useClipboard();
 const downloadHref = templateRef<HTMLElement>('download-href');
 const focusIcon = computed(() => appStore.focusIcon);
 const focusSvg = ref('');
@@ -15,10 +14,17 @@ const focusSvgVersion = ref<string>();
 const baseSvgVersion = computed(() => {
   return focusSvgVersion.value || focusIcon.value?.versions.svg[0];
 });
+watch(focusIcon, (focusIcon) => {
+  if (!focusIcon) return;
+  setFocusSvg(focusIcon.base);
+  // eslint-disable-next-line prefer-destructuring
+  focusSvg.value = focusIcon.versions.svg[0];
+});
 
 const setFocusSvg = async (version: string) => {
   if (!focusIcon.value) return;
 
+  focusSvg.value = '';
   focusSvg.value = await getDeviconSvg(focusIcon.value.name || '', version);
   focusSvgVersion.value = version;
 };
@@ -89,69 +95,96 @@ const svgToImgDownload = (ext: string) => {
 
 <template>
   <div v-if="focusIcon" class="icon-info">
-    <div class="svg">
-      <div class="content">
-        <img
+    <div class="font-version">
+      <h1>Font versions</h1>
+      <ul class="content">
+        <li v-for="version in focusIcon.versions.font" :key="version">
+          <i :class="{ [`devicon-${focusIcon.name}-${version}`]: true }"></i>
+        </li>
+      </ul>
+    </div>
+    <div class="svg-version">
+      <h1>SVG versions</h1>
+      <ul class="content">
+        <li
           v-for="version in focusIcon.versions.svg"
           :key="version"
           :class="{ active: baseSvgVersion === version }"
-          :alt="focusIcon.name"
-          :src="getSvgURL(focusIcon.name, version)"
-          @click="setFocusSvg(version)"
-        />
+        >
+          <img
+            :alt="focusIcon.name"
+            :src="getSvgURL(focusIcon.name, version)"
+            @click="setFocusSvg(version)"
+          />
+        </li>
+      </ul>
+      <CodeCopy :code="focusSvg" />
+      <div class="download-buttons">
+        <button
+          v-for="downloadType in ['png', 'jpg', 'webp', 'svg']"
+          :key="downloadType"
+          @click="svgToImgDownload(downloadType)"
+        >
+          <SvgIcon name="file_download" size="20px" />
+          {{ downloadType }}
+        </button>
+        <a ref="download-href" hidden></a>
       </div>
-      <button @click="copy(focusSvg)">
-        <span v-if="!copied">Copy</span>
-        <span v-else>Copied!</span>
-      </button>
-    </div>
-
-    <div>
-      <button
-        v-for="downloadType in ['png', 'jpg', 'webp', 'svg']"
-        :key="downloadType"
-        @click="svgToImgDownload(downloadType)"
-        v-text="`download ${downloadType}`"
-      ></button>
-      <a ref="download-href" hidden></a>
     </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
 .icon-info {
-  .svg {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  position: sticky;
+  top: 0;
+  width: 320px;
+  height: 100vh;
+  overflow: auto;
 
+  .font-version,
+  .svg-version {
     .content {
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+      flex-wrap: wrap;
+      list-style: none;
 
-      img {
-        width: 100%;
-        height: auto;
+      li {
+        width: 70px;
+        max-height: 70px;
+        margin: 5px;
+        font-size: 70px;
+        border: 1px solid transparent;
+        border-radius: 5px;
+
+        &.active {
+          border-color: #000;
+        }
       }
     }
 
-    button {
-      padding: 0.5rem 1rem;
-      margin-top: 1rem;
-      font-size: 1rem;
-      color: #000;
-      cursor: pointer;
-      background-color: #fff;
-      border: 1px solid #ccc;
-      border-radius: 0.25rem;
+    > h1 {
+      border-bottom: 1px solid rgb(0 0 0);
+    }
+  }
 
-      &:hover {
-        color: #fff;
-        background-color: #ccc;
+  .svg-version {
+    .download-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      list-style: none;
+
+      button {
+        padding: 0 5px;
+        margin: 2px 5px;
+        font-size: 16px;
       }
+    }
+  }
+
+  .show-code {
+    pre {
+      overflow-y: auto;
     }
   }
 }

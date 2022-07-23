@@ -10,10 +10,22 @@ getDeviconData().then((d) => Object.assign(deviconData, d));
 </script>
 
 <template>
-  <Suspense>
-    <IconsComponent />
-  </Suspense>
-  <IconInfo />
+  <div class="view">
+    <Suspense>
+      <IconsComponent class="icons" />
+    </Suspense>
+    <IconInfo />
+  </div>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.view {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  .icons {
+    width: 100%;
+  }
+}
+</style>
