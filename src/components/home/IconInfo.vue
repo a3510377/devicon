@@ -31,9 +31,24 @@ const waitForImage = (imgElem: HTMLImageElement) =>
     imgElem.onerror = resolve;
   });
 
+const downloadFile = (dataURL: string, filename: string) => {
+  downloadHref.value?.setAttribute('href', dataURL);
+  downloadHref.value?.setAttribute('download', filename);
+  downloadHref.value?.click();
+};
+
 const svgToImgDownload = (ext: string) => {
   if (!focusSvgVersion.value) return;
-  if (!['png', 'jpg', 'webp', 'svg'].includes(ext)) return;
+  if (ext === 'svg') {
+    return downloadFile(
+      `data:image/svg+xml;charset=utf-8;base64,${btoa(focusSvg.value)}`,
+      `${[
+        focusIcon.value?.name || 'file',
+        focusSvgVersion.value || 'original',
+      ].join('-')}.svg`
+    );
+  }
+  if (!['png', 'jpg', 'webp'].includes(ext)) return;
 
   const svgDiv = document.createElement('div');
   document.body.appendChild(svgDiv);
@@ -45,7 +60,6 @@ const svgToImgDownload = (ext: string) => {
 
   const img = document.createElement('img');
   img.src = `data:image/svg+xml;charset=utf-8;base64,${btoa(svgStr)}`;
-  console.log(img.src, svgDiv.clientWidth);
 
   return waitForImage(img)
     .then((_) => {
@@ -61,17 +75,13 @@ const svgToImgDownload = (ext: string) => {
       return canvas.toDataURL(`image/${ext === 'jpg' ? 'jpeg' : ext}`, 1.0);
     })
     .then((dataURL) => {
-      downloadHref.value?.setAttribute('href', dataURL);
-      downloadHref.value?.setAttribute(
-        'download',
+      downloadFile(
+        dataURL,
         `${[
           focusIcon.value?.name || 'file',
           focusSvgVersion.value || 'original',
         ].join('-')}.${ext}`
       );
-      downloadHref.value?.click();
-
-      ({ dataURL, ext });
     })
     .catch(console.error);
 };
