@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, reactive, onMounted, watchEffect } from 'vue';
+import { computed, reactive, onMounted, watchEffect, ref } from 'vue';
 import { useMagicKeys } from '@vueuse/core';
 
 import { getDeviconData } from '@/utils/data';

@@ -1,10 +1,12 @@
 <script lang="ts" setup>
 import { ref, watch } from 'vue';
+import { onStartTyping } from '@vueuse/core';
 import { Search } from 'js-search';
 
 import { useAppStore } from '@/stores/modules/app';
 import { deviconDataType } from '@/utils/data';
 
+const inputEl = ref<HTMLInputElement & { active: boolean }>();
 const appStore = useAppStore();
 const search = new Search('name');
 search.addIndex('tags');
@@ -23,6 +25,10 @@ watch(searchStr, (searchStr) => {
   });
   appStore.nowIcons = data;
 });
+
+onStartTyping(() => {
+  if (!inputEl.value?.active) inputEl.value?.focus();
+});
 </script>
 
 <template>
@@ -32,6 +38,7 @@ watch(searchStr, (searchStr) => {
     </label>
     <input
       id="icon-search"
+      ref="inputEl"
       v-model="searchStr"
       type="text"
       placeholder="Search Material Symbols"
