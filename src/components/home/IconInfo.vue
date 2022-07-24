@@ -4,6 +4,7 @@ import { templateRef } from '@vueuse/core';
 
 import { useAppStore } from '@/stores/modules/app';
 import { getSvgURL, getDeviconSvg } from '@/utils/data';
+import { makeRepeated } from '@/utils/utils';
 
 const appStore = useAppStore();
 
@@ -11,6 +12,7 @@ const downloadHref = templateRef<HTMLElement>('download-href');
 const focusIcon = computed(() => appStore.focusIcon);
 const focusSvg = ref('');
 const focusSvgVersion = ref<string>();
+const focusFontVersion = ref<string[]>();
 const downloadUrl = ref('');
 const downloadFileName = ref('');
 const baseSvgVersion = computed(() => {
@@ -98,12 +100,38 @@ const svgToImgDownload = (ext: string) => {
   <div v-if="focusIcon" class="icon-info">
     <div class="font-version">
       <h1>Font versions</h1>
+      <CodeCopy
+        code="<link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css'>"
+        title="Place this in your header (once per HTML file):"
+      />
+      <br />
       <ul class="content">
-        <li v-for="version in focusIcon.versions.font" :key="version">
-          <i :class="{ [`devicon-${focusIcon.name}-${version}`]: true }"></i>
+        <li
+          v-for="(version, index) in makeRepeated(focusIcon.versions.font, 2)"
+          :key="version"
+          :class="{
+            active:
+              focusFontVersion?.join('-') ===
+              [version, index % 2 ? 'colored' : ''].join('-'),
+          }"
+          @click="focusFontVersion = [version, index % 2 ? 'colored' : '']"
+        >
+          <i
+            :class="{
+              [`devicon-${focusIcon.name}-${version}`]: true,
+              colored: index % 2,
+            }"
+          ></i>
         </li>
       </ul>
+      <CodeCopy
+        :code="`<i class='devicon-${focusIcon.name}-${focusFontVersion
+          ?.join(' ')
+          .trim()}'></i>`"
+        title="Place this in your body:"
+      />
     </div>
+    <br />
     <div class="svg-version">
       <h1>SVG versions</h1>
       <ul class="content">
@@ -177,11 +205,14 @@ const svgToImgDownload = (ext: string) => {
         width: 70px;
         max-height: 70px;
         margin: 5px;
-        font-size: 70px;
         cursor: pointer;
         border: 1px solid transparent;
         border-radius: 5px;
         transition: 0.2s;
+
+        i {
+          font-size: 70px;
+        }
 
         &.active {
           border-color: #06f;
