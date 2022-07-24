@@ -1,6 +1,7 @@
 {
   "name": "Devicon",
-  "start_url": "https://a3510377.github.io/devicon/",
+  "id": "/devicon/",
+  "start_url": "https://a3510377.github.io",
   "theme_color": "#fff",
   "background_color": "#fff",
   "icons": [
