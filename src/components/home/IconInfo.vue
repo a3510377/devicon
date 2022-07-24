@@ -14,10 +14,11 @@ const focusSvgVersion = ref<string>();
 const baseSvgVersion = computed(() => {
   return focusSvgVersion.value || focusIcon.value?.versions.svg[0];
 });
-watch(focusIcon, (focusIcon) => {
-  if (!focusIcon) return;
-  setFocusSvg(focusIcon.versions.svg[0]);
-});
+
+watch(
+  focusIcon,
+  (focusIcon) => focusIcon && setFocusSvg(focusIcon.versions.svg[0])
+);
 
 const setFocusSvg = async (version: string) => {
   if (!focusIcon.value) return;
