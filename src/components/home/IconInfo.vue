@@ -141,7 +141,7 @@ const svgToImgDownload = (ext: string) => {
 .icon-info {
   position: fixed;
   top: 10px;
-  right: 0;
+  right: 15px;
   width: 320px;
   padding: 30px 15px;
   background-color: rgb(224 224 224);

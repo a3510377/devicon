@@ -26,8 +26,6 @@ getDeviconData().then((d) => Object.assign(deviconData, d));
 
 <style lang="scss" scoped>
 .view {
-  padding: 20px 64px 8em;
-
   .icons {
     width: 100%;
   }

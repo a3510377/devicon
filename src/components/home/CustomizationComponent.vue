@@ -41,5 +41,8 @@ useStyleTag(computed(() => `:root{--cbp-ig-icon-size:${fontSize.value}px}`));
   label {
     font-size: 18pt;
   }
+  @media all and (max-width: 760px) {
+    display: none;
+  }
 }
 </style>
