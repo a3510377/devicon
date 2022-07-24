@@ -32,5 +32,6 @@ const height = propsHeight ?? size ?? '32px';
   width: v-bind('width');
   height: v-bind('height');
   vertical-align: middle;
+  color: v-bind('color');
 }
 </style>
