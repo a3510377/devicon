@@ -19,9 +19,15 @@ footer {
 
   .footer {
     width: 80%;
+    height: 70px;
     margin: 0 auto;
     font-size: 15pt;
     color: #e8eaed;
   }
+}
+</style>
+<style>
+:root {
+  --footer-height: 170px;
 }
 </style>

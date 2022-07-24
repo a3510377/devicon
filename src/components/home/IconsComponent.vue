@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { reactive } from 'vue';
+import { computed, reactive, onMounted } from 'vue';
 
 import { getDeviconData } from '@/utils/data';
 import { useAppStore } from '@/stores/modules/app';
@@ -7,11 +7,14 @@ import { useAppStore } from '@/stores/modules/app';
 import IconsComponent from './IconComponent.vue';
 
 const appStore = useAppStore();
-const deviconData = reactive(await getDeviconData());
+const fetchDeviconData = reactive(await getDeviconData());
+const deviconData = computed(() => appStore.nowIcons || fetchDeviconData);
+
+onMounted(() => Object.assign(appStore.baseIcons, fetchDeviconData));
 
 const iconClick = (name: string) => {
   if (appStore.focusIcon?.name === name) appStore.focusIcon = void 0;
-  else appStore.focusIcon = deviconData[name];
+  else appStore.focusIcon = deviconData.value[name];
 };
 </script>
 

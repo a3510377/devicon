@@ -16,6 +16,7 @@
     "@vue/eslint-config-typescript": "^11.0.0",
     "@vueuse/core": "^8.9.4",
     "axios": "^0.27.2",
+    "js-search": "^2.0.0",
     "pinia": "^2.0.14",
     "vite": "^2.9.12",
     "vite-plugin-svg-icons": "^2.0.1",
@@ -24,6 +25,7 @@
     "vue-router": "^4.0.16"
   },
   "devDependencies": {
+    "@types/js-search": "^1.4.0",
     "@types/node": "^18.0.0",
     "@typescript-eslint/eslint-plugin": "^5.28.0",
     "@typescript-eslint/parser": "^5.28.0",

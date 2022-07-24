@@ -1,14 +1,18 @@
 import { defineStore } from 'pinia';
-import { deviconDataType } from '@/utils/data';
+import { deviconDataType, deviconDictType } from '@/utils/data';
 
 export interface AppStoreType {
+  baseIcons: deviconDictType;
+  nowIcons?: deviconDictType;
   focusIcon?: deviconDataType;
-  colored?: boolean;
+  colored: boolean;
 }
 
 export const useAppStore = defineStore({
   id: 'app',
   state: (): AppStoreType => ({
     colored: true,
+    baseIcons: {},
+    nowIcons: void 0,
   }),
 });
