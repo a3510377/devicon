@@ -46,7 +46,7 @@ const appStore = useAppStore();
   }
 
   &.active {
-    border-color: blue;
+    border-color: black;
   }
 
   h3 {
