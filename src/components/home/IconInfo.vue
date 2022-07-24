@@ -126,7 +126,7 @@ const svgToImgDownload = (ext: string) => {
           :key="downloadType"
           @click="svgToImgDownload(downloadType)"
         >
-          <SvgIcon name="file_download" size="20px" />
+          <SvgIcon name="file_download" size="20px" color="#fff" />
           {{ downloadType }}
         </button>
         <a
@@ -150,8 +150,11 @@ const svgToImgDownload = (ext: string) => {
   right: 15px;
   width: 320px;
   padding: 30px 15px;
-  background-color: rgb(224 224 224);
+  background-color: #fff;
   border-radius: 12px;
+  box-shadow: -1px -1px 90px 6px rgba(161, 161, 161, 0.88);
+  -webkit-box-shadow: -1px -1px 90px 6px rgba(161, 161, 161, 0.88);
+  -moz-box-shadow: -1px -1px 90px 6px rgba(161, 161, 161, 0.88);
 
   .font-version,
   .svg-version {
@@ -159,6 +162,7 @@ const svgToImgDownload = (ext: string) => {
       display: flex;
       flex-wrap: wrap;
       list-style: none;
+      margin-bottom: 10px;
 
       li {
         width: 70px;
@@ -167,9 +171,12 @@ const svgToImgDownload = (ext: string) => {
         font-size: 70px;
         border: 1px solid transparent;
         border-radius: 5px;
+        cursor: pointer;
+        transition: 0.2s;
 
         &.active {
-          border-color: #000;
+          border-color: #0066ff;
+          transform: scale(110%);
         }
 
         img {
@@ -179,20 +186,36 @@ const svgToImgDownload = (ext: string) => {
     }
 
     > h1 {
-      border-bottom: 1px solid rgb(0 0 0);
+      border-bottom: 1px solid rgb(0, 0, 0);
+      margin-bottom: 8px;
     }
   }
 
   .svg-version {
     .download-buttons {
+      margin-top: 10px;
       display: flex;
       flex-wrap: wrap;
       list-style: none;
 
       button {
-        padding: 0 5px;
+        padding: 5px 10px;
         margin: 2px 5px;
         font-size: 16px;
+        border: 1px solid #0066ff;
+        border-radius: 5px;
+        background-color: #0066ff;
+        color: #fff;
+        text-transform: uppercase;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-weight: 300;
+        cursor: pointer;
+        transition: 0.2s;
+        &:hover {
+          transform: scale(110%);
+        }
       }
     }
   }
