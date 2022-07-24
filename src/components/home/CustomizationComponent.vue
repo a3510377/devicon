@@ -1,8 +1,21 @@
 <template>
   <div class="customization">
     <h1>customization</h1>
-    <input v-model="fontSize" type="range" min="20" max="48" step="7" />
-    <input v-model="appStore.colored" type="checkbox" />
+    <div>
+      <label for="set-colored">colored</label>
+      <input id="set-colored" v-model="appStore.colored" type="checkbox" />
+    </div>
+    <div>
+      <label for="optical-size">Optical size</label>
+      <input
+        id="optical-size"
+        v-model="fontSize"
+        type="range"
+        min="20"
+        max="48"
+        step="7"
+      />
+    </div>
   </div>
 </template>
 
@@ -24,5 +37,9 @@ useStyleTag(computed(() => `:root{--cbp-ig-icon-size:${fontSize.value}px}`));
   right: 0;
   height: 100vh;
   padding: 30px 15px;
+
+  label {
+    font-size: 18pt;
+  }
 }
 </style>
