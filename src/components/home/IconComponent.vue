@@ -1,14 +1,20 @@
 <script setup lang="ts">
+import { useAppStore } from '@/stores/modules/app';
 import { deviconDataType } from '@/utils/data';
 
 defineProps<{ icon: deviconDataType }>();
+
+const appStore = useAppStore();
 </script>
 
 <template>
   <button class="icon">
     <i
-      class="cbp-ig-icon colored"
-      :class="{ [`devicon-${icon.name}-${icon.base}`]: true }"
+      class="cbp-ig-icon"
+      :class="{
+        [`devicon-${icon.name}-${icon.base}`]: true,
+        colored: appStore.colored,
+      }"
     ></i>
     <h3 v-text="icon.name"></h3>
   </button>
@@ -41,7 +47,8 @@ defineProps<{ icon: deviconDataType }>();
 
 .cbp-ig-icon {
   display: block;
-  font-size: 48px;
+  font-size: var(--cbp-ig-icon-size, 48px);
+  line-height: 48px;
   transition: transform 0.2s;
 }
 

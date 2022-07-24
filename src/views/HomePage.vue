@@ -4,6 +4,7 @@ import { reactive } from 'vue';
 import { getDeviconData, deviconDataType } from '@/utils/data';
 import IconsComponent from '@/components/home/IconsComponent.vue';
 import IconInfo from '@/components/home/IconInfo.vue';
+import CustomizationComponent from '@/components/home/CustomizationComponent.vue';
 import FooterComponent from '@/components/base/FooterComponent.vue';
 
 const deviconData = reactive<deviconDataType[]>([]);
@@ -16,8 +17,8 @@ getDeviconData().then((d) => Object.assign(deviconData, d));
       <Suspense>
         <IconsComponent class="icons" />
       </Suspense>
+      <CustomizationComponent />
       <IconInfo />
-      <!-- <Customization /> -->
     </div>
   </div>
   <FooterComponent />
