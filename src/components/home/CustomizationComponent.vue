@@ -1,3 +1,14 @@
+<script lang="ts" setup>
+import { computed, ref } from 'vue';
+import { useStyleTag } from '@vueuse/core';
+import { useAppStore } from '@/stores/modules/app';
+
+const appStore = useAppStore();
+const fontSize = ref<number>(48);
+
+useStyleTag(computed(() => `:root{--cbp-ig-icon-size:${fontSize.value}px}`));
+</script>
+
 <template>
   <div class="customization">
     <h1>customization</h1>
@@ -18,17 +29,6 @@
     </div>
   </div>
 </template>
-
-<script lang="ts" setup>
-import { computed, ref } from 'vue';
-import { useStyleTag } from '@vueuse/core';
-import { useAppStore } from '@/stores/modules/app';
-
-const appStore = useAppStore();
-const fontSize = ref<number>(48);
-
-useStyleTag(computed(() => `:root{--cbp-ig-icon-size:${fontSize.value}px}`));
-</script>
 
 <style lang="scss" scoped>
 .customization {
