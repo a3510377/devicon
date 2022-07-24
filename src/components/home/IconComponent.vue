@@ -8,7 +8,10 @@ const appStore = useAppStore();
 </script>
 
 <template>
-  <button class="icon">
+  <button
+    class="icon"
+    :class="{ active: appStore.focusIcon?.name === icon.name }"
+  >
     <i
       class="cbp-ig-icon"
       :class="{
@@ -26,8 +29,9 @@ const appStore = useAppStore();
   height: 120px;
   text-align: center;
   word-break: break-all;
+  cursor: pointer;
   background-color: transparent;
-  border: 0;
+  border: 1px solid transparent;
   border-radius: 5px;
   user-select: none;
 
@@ -35,9 +39,14 @@ const appStore = useAppStore();
     background-color: rgb(232 234 237 / 75.5%);
   }
 
+  &.active,
   &:focus {
     background-color: #0000001b;
     outline: none;
+  }
+
+  &.active {
+    border-color: blue;
   }
 
   h3 {

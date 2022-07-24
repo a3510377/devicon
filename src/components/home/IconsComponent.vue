@@ -9,7 +9,10 @@ import IconsComponent from './IconComponent.vue';
 const appStore = useAppStore();
 const deviconData = reactive(await getDeviconData());
 
-const iconClick = (name: string) => (appStore.focusIcon = deviconData[name]);
+const iconClick = (name: string) => {
+  if (appStore.focusIcon?.name === name) appStore.focusIcon = void 0;
+  else appStore.focusIcon = deviconData[name];
+};
 </script>
 
 <template>

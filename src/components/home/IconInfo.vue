@@ -131,17 +131,21 @@ const svgToImgDownload = (ext: string) => {
         <a ref="download-href" hidden></a>
       </div>
     </div>
+    <div class="close-btn" @click="appStore.focusIcon = void 0">
+      <SvgIcon name="close" size="24px" />
+    </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
 .icon-info {
-  position: sticky;
-  top: 0;
+  position: fixed;
+  top: 10px;
+  right: 0;
   width: 320px;
-  height: 100vh;
   padding: 30px 15px;
-  overflow: auto;
+  background-color: rgb(224 224 224);
+  border-radius: 12px;
 
   .font-version,
   .svg-version {
@@ -160,6 +164,10 @@ const svgToImgDownload = (ext: string) => {
 
         &.active {
           border-color: #000;
+        }
+
+        img {
+          padding: 5px;
         }
       }
     }
@@ -187,6 +195,13 @@ const svgToImgDownload = (ext: string) => {
     pre {
       overflow-y: auto;
     }
+  }
+
+  .close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    cursor: pointer;
   }
 }
 </style>
