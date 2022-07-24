@@ -3,6 +3,7 @@ root = true
 
 [*]
 charset = utf-8
+end_of_line = lf
 indent_style = space # indent style
 indent_size = 2 # indent size
 trim_trailing_whitespace = true # trim trailing whitespace

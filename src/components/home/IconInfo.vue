@@ -152,30 +152,28 @@ const svgToImgDownload = (ext: string) => {
   padding: 30px 15px;
   background-color: #fff;
   border-radius: 12px;
-  box-shadow: -1px -1px 90px 6px rgba(161, 161, 161, 0.88);
-  -webkit-box-shadow: -1px -1px 90px 6px rgba(161, 161, 161, 0.88);
-  -moz-box-shadow: -1px -1px 90px 6px rgba(161, 161, 161, 0.88);
+  box-shadow: -1px -1px 90px 6px rgb(161 161 161 / 88%);
 
   .font-version,
   .svg-version {
     .content {
       display: flex;
-      flex-wrap: wrap;
-      list-style: none;
       margin-bottom: 10px;
+      list-style: none;
+      flex-wrap: wrap;
 
       li {
         width: 70px;
         max-height: 70px;
         margin: 5px;
         font-size: 70px;
+        cursor: pointer;
         border: 1px solid transparent;
         border-radius: 5px;
-        cursor: pointer;
         transition: 0.2s;
 
         &.active {
-          border-color: #0066ff;
+          border-color: #06f;
           transform: scale(110%);
         }
 
@@ -186,33 +184,34 @@ const svgToImgDownload = (ext: string) => {
     }
 
     > h1 {
-      border-bottom: 1px solid rgb(0, 0, 0);
       margin-bottom: 8px;
+      border-bottom: 1px solid rgb(0 0 0);
     }
   }
 
   .svg-version {
     .download-buttons {
-      margin-top: 10px;
       display: flex;
-      flex-wrap: wrap;
+      margin-top: 10px;
       list-style: none;
+      flex-wrap: wrap;
 
       button {
+        display: flex;
         padding: 5px 10px;
         margin: 2px 5px;
         font-size: 16px;
-        border: 1px solid #0066ff;
-        border-radius: 5px;
-        background-color: #0066ff;
+        font-weight: 300;
         color: #fff;
         text-transform: uppercase;
-        display: flex;
+        cursor: pointer;
+        background-color: #06f;
+        border: 1px solid #06f;
+        border-radius: 5px;
+        transition: 0.2s;
         align-items: center;
         justify-content: space-between;
-        font-weight: 300;
-        cursor: pointer;
-        transition: 0.2s;
+
         &:hover {
           transform: scale(110%);
         }
