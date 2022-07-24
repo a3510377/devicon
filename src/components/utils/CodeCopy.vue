@@ -33,7 +33,7 @@ const selectCode = () => {
 .code-copy {
   padding: 14px;
   text-align: end;
-  background-color: #d0d0d0;
+  background-color: #e6e6e6;
   border-radius: 11px;
 
   pre {
