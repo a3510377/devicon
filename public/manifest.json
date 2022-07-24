@@ -1,5 +1,8 @@
 {
   "name": "Devicon",
+  "start_url": "https://a3510377.github.io/devicon/",
+  "theme_color": "#fff",
+  "background_color": "#fff",
   "icons": [
     {
       "src": "/android-chrome-36x36.png",
