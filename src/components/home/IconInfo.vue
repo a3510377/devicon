@@ -16,9 +16,7 @@ const baseSvgVersion = computed(() => {
 });
 watch(focusIcon, (focusIcon) => {
   if (!focusIcon) return;
-  setFocusSvg(focusIcon.base);
-  // eslint-disable-next-line prefer-destructuring
-  focusSvg.value = focusIcon.versions.svg[0];
+  setFocusSvg(focusIcon.versions.svg[0]);
 });
 
 const setFocusSvg = async (version: string) => {

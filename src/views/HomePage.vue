@@ -17,7 +17,7 @@ getDeviconData().then((d) => Object.assign(deviconData, d));
       <Suspense>
         <IconsComponent class="icons" />
       </Suspense>
-      <CustomizationComponent />
+      <!-- <CustomizationComponent /> -->
       <IconInfo />
     </div>
   </div>
