@@ -11,6 +11,8 @@ const downloadHref = templateRef<HTMLElement>('download-href');
 const focusIcon = computed(() => appStore.focusIcon);
 const focusSvg = ref('');
 const focusSvgVersion = ref<string>();
+const downloadUrl = ref('');
+const downloadFileName = ref('');
 const baseSvgVersion = computed(() => {
   return focusSvgVersion.value || focusIcon.value?.versions.svg[0];
 });
@@ -37,8 +39,8 @@ const waitForImage = (imgElem: HTMLImageElement) =>
   });
 
 const downloadFile = (dataURL: string, filename: string) => {
-  downloadHref.value?.setAttribute('href', dataURL);
-  downloadHref.value?.setAttribute('download', filename);
+  downloadUrl.value = dataURL;
+  downloadFileName.value = filename;
   downloadHref.value?.click();
 };
 
@@ -127,7 +129,12 @@ const svgToImgDownload = (ext: string) => {
           <SvgIcon name="file_download" size="20px" color="#fff" />
           {{ downloadType }}
         </button>
-        <a ref="download-href" hidden></a>
+        <a
+          ref="download-href"
+          :href="downloadUrl"
+          :download="downloadFileName"
+          hidden
+        ></a>
       </div>
     </div>
     <div class="close-btn" @click="appStore.focusIcon = void 0">
