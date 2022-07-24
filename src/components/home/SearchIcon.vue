@@ -8,8 +8,10 @@ import { deviconDataType } from '@/utils/data';
 
 const inputEl = ref<HTMLInputElement & { active: boolean }>();
 const appStore = useAppStore();
+
 const search = new Search('name');
 search.addIndex('tags');
+search.addIndex('name');
 
 const searchStr = ref('');
 
