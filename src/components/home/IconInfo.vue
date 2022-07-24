@@ -119,7 +119,15 @@ const svgToImgDownload = (ext: string) => {
           />
         </li>
       </ul>
-      <CodeCopy :code="focusSvg" />
+      <CodeCopy
+        :code="`<img src='${getSvgURL(
+          focusIcon.name,
+          focusSvgVersion || ''
+        )}' />`"
+        title="Using <img /> element:"
+      />
+      <br />
+      <CodeCopy :code="focusSvg" title="Using Pure SVG:" />
       <div class="download-buttons">
         <button
           v-for="downloadType in ['png', 'jpg', 'webp', 'svg']"
@@ -149,10 +157,13 @@ const svgToImgDownload = (ext: string) => {
   top: 10px;
   right: 15px;
   width: 320px;
+  max-height: 80%;
   padding: 30px 15px;
+  overflow: auto;
   background-color: #fff;
   border-radius: 12px;
   box-shadow: -1px -1px 90px 6px rgb(161 161 161 / 88%);
+  scrollbar-width: none;
 
   .font-version,
   .svg-version {
@@ -230,6 +241,10 @@ const svgToImgDownload = (ext: string) => {
     top: 15px;
     right: 15px;
     cursor: pointer;
+  }
+
+  &::-webkit-scrollbar {
+    display: none;
   }
 
   @media all and (max-width: 500px) {

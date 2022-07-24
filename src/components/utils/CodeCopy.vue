@@ -8,6 +8,7 @@ const codeCopy = templateRef<HTMLElement>('code-copy');
 const { copy: useCopy = true } = defineProps<{
   code: string;
   copy?: boolean;
+  title?: string;
 }>();
 
 const selectCode = () => {
@@ -22,6 +23,7 @@ const selectCode = () => {
 
 <template>
   <div ref="code-copy" class="code-copy">
+    <h4 v-if="title" class="title" v-text="title"></h4>
     <pre @click="selectCode"><code v-text="code"></code></pre>
     <div v-if="!useCopy" class="copy-btn" @click="copy(code)">
       <SvgIcon name="content_copy" size="20px" />
@@ -32,7 +34,6 @@ const selectCode = () => {
 <style lang="scss" scoped>
 .code-copy {
   padding: 14px;
-  text-align: end;
   background-color: #e6e6e6;
   border-radius: 11px;
 
@@ -42,8 +43,15 @@ const selectCode = () => {
     word-break: break-all;
   }
 
+  .title {
+    padding-bottom: 8px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #000;
+  }
+
   .copy-btn {
     margin-top: 10px;
+    text-align: end;
   }
 }
 </style>
