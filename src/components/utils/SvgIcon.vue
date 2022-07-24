@@ -10,7 +10,7 @@ import { computed } from 'vue';
 // eslint-disable-next-line vue/no-setup-props-destructure
 const {
   name,
-  prefix = 'icon',
+  prefix = '__svg__icon',
   width: propsWidth,
   height: propsHeight,
   size,

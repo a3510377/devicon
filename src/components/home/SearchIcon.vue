@@ -27,7 +27,15 @@ watch(searchStr, (searchStr) => {
 
 <template>
   <div class="search">
-    <input v-model="searchStr" type="text" />
+    <label for="icon-search">
+      <SvgIcon name="search" color="black" size="24px" />
+    </label>
+    <input
+      id="icon-search"
+      v-model="searchStr"
+      type="text"
+      placeholder="Search Material Symbols"
+    />
   </div>
 </template>
 
@@ -36,7 +44,18 @@ watch(searchStr, (searchStr) => {
   position: sticky;
   top: 0;
   display: flex;
+  width: 100%;
+  padding: 20px;
+  margin: 2em 0;
+  background-color: #fff;
+  align-items: center;
   justify-content: center;
-  margin-top: 3em;
+  box-shadow: 0 15px 14px -15px #565656;
+
+  #icon-search {
+    width: 450px;
+    padding: 5px 10px;
+    border: 1px solid #000;
+  }
 }
 </style>
