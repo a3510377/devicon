@@ -203,5 +203,14 @@ const svgToImgDownload = (ext: string) => {
     right: 15px;
     cursor: pointer;
   }
+
+  @media all and (max-width: 500px) {
+    top: auto;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: auto;
+    border-radius: 0;
+  }
 }
 </style>
