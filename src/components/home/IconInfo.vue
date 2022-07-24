@@ -140,6 +140,7 @@ const svgToImgDownload = (ext: string) => {
   top: 0;
   width: 320px;
   height: 100vh;
+  padding: 30px 0;
   overflow: auto;
 
   .font-version,
