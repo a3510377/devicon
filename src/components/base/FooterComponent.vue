@@ -14,6 +14,7 @@
 <style lang="scss" scoped>
 footer {
   padding: 20px 0;
+  margin-top: 60px;
   background-color: #81848d;
 
   .footer {
