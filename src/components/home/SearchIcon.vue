@@ -43,7 +43,7 @@ onStartTyping(() => {
       id="icon-search"
       ref="inputEl"
       v-model="searchStr"
-      type="text"
+      type="search"
       placeholder="Search Material Symbols"
     />
   </div>
