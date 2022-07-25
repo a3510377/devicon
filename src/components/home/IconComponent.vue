@@ -36,7 +36,7 @@ const appStore = useAppStore();
   user-select: none;
 
   &:hover {
-    background-color: rgb(232 234 237 / 75.5%);
+    background-color: #e8eaedc1;
   }
 
   &.active,

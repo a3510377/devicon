@@ -58,7 +58,7 @@ onStartTyping(() => {
   margin: 2em 0;
   background-color: #fff;
   border-radius: 15px;
-  box-shadow: -1px -1px 90px 6px rgb(161 161 161 / 31.8%);
+  box-shadow: -1px -1px 90px 6px #a1a1a151;
   align-items: center;
   justify-content: center;
 
@@ -74,7 +74,7 @@ onStartTyping(() => {
 
     &:hover,
     &:focus {
-      box-shadow: 0 0 29px -8px rgb(0 102 255 / 58.8%);
+      box-shadow: 0 0 20px -6px #0066ff96;
     }
 
     &:focus {

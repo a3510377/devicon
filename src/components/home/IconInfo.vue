@@ -200,7 +200,7 @@ const svgToImgDownload = (ext: string) => {
   overflow: auto;
   background-color: #fff;
   border-radius: 12px;
-  box-shadow: -1px -1px 90px 6px rgb(161 161 161 / 88%);
+  box-shadow: -1px -1px 90px 6px #a1a1a1e0;
   scrollbar-width: none;
 
   .font-version,
@@ -238,7 +238,7 @@ const svgToImgDownload = (ext: string) => {
 
     > h1 {
       margin-bottom: 8px;
-      border-bottom: 1px solid rgb(0 0 0);
+      border-bottom: 1px solid #000;
     }
   }
 
