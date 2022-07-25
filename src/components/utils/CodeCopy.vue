@@ -36,11 +36,13 @@ const selectCode = () => {
     </div>
 
     <pre ref="code-copy" @click="selectCode"><code v-text="code"></code></pre>
+    <div class="skeleton"></div>
   </div>
 </template>
 
 <style lang="scss" scoped>
 .code-copy {
+  min-height: 120px;
   padding: 5px 0 0;
   background-color: #eee;
   border-radius: 5px;
