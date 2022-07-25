@@ -35,8 +35,10 @@ const selectCode = () => {
       </div>
     </div>
 
-    <pre ref="code-copy" @click="selectCode"><code v-text="code"></code></pre>
-    <div class="skeleton"></div>
+    <pre
+      ref="code-copy"
+      @click="selectCode"
+    ><code v-text="code || ' '"></code></pre>
   </div>
 </template>
 
