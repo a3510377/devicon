@@ -17,7 +17,6 @@ const selectCode = () => {
 
   selection?.removeAllRanges();
   range.selectNodeContents(codeCopy.value);
-  console.log(codeCopy.value);
   selection?.addRange(range);
 };
 </script>
