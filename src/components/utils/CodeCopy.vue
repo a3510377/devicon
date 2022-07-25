@@ -121,7 +121,7 @@ const selectCode = () => {
 
       &::after {
         position: absolute;
-        top: -48px;
+        top: -46.5px;
         right: -50%;
         padding: 8px;
         background-color: #9cc3fd;
