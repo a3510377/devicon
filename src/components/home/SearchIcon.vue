@@ -44,8 +44,16 @@ onStartTyping(() => {
       ref="inputEl"
       v-model="searchStr"
       type="search"
+      list="auto-icon-search"
       placeholder="Search Material Symbols"
     />
+    <datalist id="auto-icon-search">
+      <option
+        v-for="value in appStore.baseIcons"
+        :key="value.name"
+        v-text="value.name"
+      />
+    </datalist>
   </div>
 </template>
 
