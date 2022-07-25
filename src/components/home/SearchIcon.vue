@@ -67,7 +67,7 @@ onStartTyping(() => {
   margin: 2em 0;
   background-color: #fff;
   border-radius: 15px;
-  box-shadow: -1px -1px 90px 6px #a1a1a151;
+  box-shadow: 0 0 90px 6px #a1a1a151;
   align-items: center;
   justify-content: center;
 

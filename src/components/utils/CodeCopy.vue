@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { useClipboard, templateRef } from '@vueuse/core';
 
-const { copy } = useClipboard();
+const { copy, copied } = useClipboard({ copiedDuring: 500 });
 const codeCopy = templateRef<HTMLElement>('code-copy');
 
 // eslint-disable-next-line vue/no-setup-props-destructure
@@ -25,7 +25,12 @@ const selectCode = () => {
   <div class="code-copy">
     <div class="title">
       <h4 v-if="title" v-text="title"></h4>
-      <div v-if="!useCopy" class="copy-btn" @click="copy(code)">
+      <div
+        v-if="!useCopy"
+        class="copy-btn"
+        :class="{ copied }"
+        @click="copy(code)"
+      >
         <SvgIcon name="content_copy" size="18px" />
       </div>
     </div>
@@ -90,6 +95,7 @@ const selectCode = () => {
   }
 
   .copy-btn {
+    position: relative;
     display: inline;
     padding: 5px;
     margin: 0 0 0 10px;
@@ -100,6 +106,28 @@ const selectCode = () => {
 
     &:hover {
       border: 2px solid #0066ffe7;
+    }
+
+    &.copied {
+      &::before {
+        position: absolute;
+        top: -10px;
+        left: 25%;
+        border-color: #9cc3fd transparent transparent;
+        border-style: solid;
+        border-width: 10px;
+        content: '';
+      }
+
+      &::after {
+        position: absolute;
+        top: -45px;
+        right: -50%;
+        padding: 8px;
+        background-color: #9cc3fd;
+        border-radius: 5px;
+        content: 'Copied!!';
+      }
     }
   }
 }
