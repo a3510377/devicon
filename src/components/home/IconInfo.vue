@@ -212,8 +212,8 @@ const svgToImgDownload = (ext: string) => {
       flex-wrap: wrap;
 
       li {
-        width: 70px;
         max-height: 70px;
+        min-width: 70px;
         padding: 5px;
         margin: 5px;
         cursor: pointer;
