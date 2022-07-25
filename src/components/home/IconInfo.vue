@@ -22,7 +22,7 @@ const baseSvgVersion = computed(() => {
 watch(focusIcon, (focusIcon) => {
   if (!focusIcon) return;
   setFocusSvg(focusIcon.versions.svg[0]);
-  focusFontVersion.value = [focusIcon.versions.font[0]];
+  focusFontVersion.value = [focusIcon.versions.font[0], ''];
 });
 
 const setFocusSvg = async (version: string) => {
