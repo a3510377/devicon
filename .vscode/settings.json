@@ -10,5 +10,6 @@
   "stylelint.validate": ["vue", "css", "scss", "sass"],
   "eslint.alwaysShowStatus": true,
   "commentTranslate.multiLineMerge": false,
-  "editor.defaultFormatter": "esbenp.prettier-vscode"
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "files.eol": "\n"
 }
