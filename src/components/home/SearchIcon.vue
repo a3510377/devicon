@@ -51,32 +51,34 @@ onStartTyping(() => {
 <style lang="scss" scoped>
 .search {
   position: sticky;
-  background-color: #fff;
-  box-shadow: -1px -1px 90px 6px rgba(161, 161, 161, 0.318);
   top: 0;
   display: flex;
   width: 100%;
   padding: 20px;
   margin: 2em 0;
   background-color: #fff;
+  border-radius: 15px;
+  box-shadow: -1px -1px 90px 6px rgb(161 161 161 / 31.8%);
   align-items: center;
   justify-content: center;
-  border-radius: 15px;
 
   #icon-search {
     width: 450px;
     padding: 5px 10px;
-    border: 1px solid #e5e5e5;
-    outline: none;
-    border-radius: 5px;
     margin-left: 5px;
     text-align: center;
+    border: 1px solid #e5e5e5;
+    border-radius: 5px;
+    outline: none;
     transition: 0.2s;
-    &:hover {
-      box-shadow: 0px 0px 29px -8px rgba(0, 102, 255, 0.588);
-    }
+
+    &:hover,
     &:focus {
-      border: 1px solid #0066ff;
+      box-shadow: 0 0 29px -8px rgb(0 102 255 / 58.8%);
+    }
+
+    &:focus {
+      border: 1px solid #06f;
     }
   }
 }
