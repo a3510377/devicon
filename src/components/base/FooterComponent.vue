@@ -4,9 +4,11 @@
       This website is not officially produced by devicon. It is produced by
       monkey cat. If you have any questions related to the website, please post
       questions on
-      <a href="https://github.com/a3510377/devicon">a3510377-devicon</a>. For
-      other questions related to icons, please go to
-      <a href="https://github.com/devicons/devicon">devicon</a>
+      <a href="https://github.com/a3510377/devicon" target="_blank">
+        a3510377-devicon
+      </a>
+      . For other questions related to icons, please go to
+      <a href="https://github.com/devicons/devicon" target="_blank">devicon</a>
     </div>
   </footer>
 </template>
