@@ -23,64 +23,81 @@ const selectCode = () => {
 
 <template>
   <div class="code-copy">
-    <h4 v-if="title" class="title" v-text="title"></h4>
-    <div v-if="!useCopy" class="copy-btn" @click="copy(code)">
-      <SvgIcon name="content_copy" size="20px" />
+    <div class="title">
+      <h4 v-if="title" v-text="title"></h4>
+      <div v-if="!useCopy" class="copy-btn" @click="copy(code)">
+        <SvgIcon name="content_copy" size="18px" />
+      </div>
     </div>
+
     <pre ref="code-copy" @click="selectCode"><code v-text="code"></code></pre>
   </div>
 </template>
 
 <style lang="scss" scoped>
 .code-copy {
+  padding: 5px 0 0;
   background-color: #eee;
   border-radius: 5px;
-  padding: 5px 0 0 0;
 
   pre {
     display: flex;
-    margin-top: 10px;
     padding: 8px;
-    background-color: #e5e5e5;
+    margin-top: 10px;
     overflow: auto;
     word-break: break-all;
+    background-color: #e5e5e5;
     border-radius: 5px;
+    scrollbar-color: #0066ff84 transparent;
+
     &::-webkit-scrollbar {
       height: 8px;
     }
+
     &::-webkit-scrollbar-track {
-      background: #f1f1f1;
       height: 8px;
+      background: #f1f1f1;
       border-radius: 5px;
     }
+
     &::-webkit-scrollbar-thumb {
-      border-radius: 5px;
       background: #0066ff84;
+      border-radius: 5px;
     }
+
     &::-webkit-scrollbar-thumb:hover {
-      background: #0066ff;
+      background: #0066ffb6;
     }
+
+    &:hover {
+      scrollbar-color: #0066ffb6 transparent;
+    }
+
     code {
-      font-size: 0.9rem;
       padding: 2px 5px;
+      font-size: 0.9rem;
     }
   }
 
   .title {
+    display: flex;
     padding-bottom: 8px;
+    margin: 15px;
     margin-bottom: 5px;
     border-bottom: 1px solid #000;
-    margin: 15px;
+    justify-content: space-between;
+    align-items: center;
   }
 
   .copy-btn {
-    cursor: pointer;
+    display: inline;
+    padding: 5px;
     margin: 0 0 0 10px;
     text-align: end;
-    padding: 5px;
-    border-radius: 5px;
-    display: inline;
+    cursor: pointer;
     border: 2px solid transparent;
+    border-radius: 5px;
+
     &:hover {
       border: 2px solid #0066ffe7;
     }

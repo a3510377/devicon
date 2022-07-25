@@ -214,12 +214,12 @@ const svgToImgDownload = (ext: string) => {
       li {
         width: 70px;
         max-height: 70px;
+        padding: 5px;
         margin: 5px;
         cursor: pointer;
         border: 1px solid transparent;
         border-radius: 5px;
         transition: 0.2s;
-        padding: 5px;
 
         i {
           font-size: 60px;
