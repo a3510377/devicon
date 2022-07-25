@@ -111,7 +111,7 @@ const selectCode = () => {
     &.copied {
       &::before {
         position: absolute;
-        top: -10px;
+        top: -12.5px;
         left: 25%;
         border-color: #9cc3fd transparent transparent;
         border-style: solid;
@@ -121,7 +121,7 @@ const selectCode = () => {
 
       &::after {
         position: absolute;
-        top: -45px;
+        top: -48px;
         right: -50%;
         padding: 8px;
         background-color: #9cc3fd;
