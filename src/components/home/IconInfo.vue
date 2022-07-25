@@ -185,7 +185,7 @@ const svgToImgDownload = (ext: string) => {
   position: fixed;
   top: 10px;
   right: 15px;
-  width: 320px;
+  width: 350px;
   max-height: 80%;
   padding: 30px 15px;
   overflow: auto;
@@ -210,9 +210,10 @@ const svgToImgDownload = (ext: string) => {
         border: 1px solid transparent;
         border-radius: 5px;
         transition: 0.2s;
+        padding: 5px;
 
         i {
-          font-size: 70px;
+          font-size: 60px;
         }
 
         &.active {
