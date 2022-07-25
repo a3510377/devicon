@@ -14,7 +14,7 @@ const focusSvg = ref('');
 const focusSvgVersion = ref<string>();
 const focusFontVersion = ref<string[]>();
 const downloadUrl = ref('');
-const downloadFileName = ref('');
+const downloadFileName = ref('Please-download-again');
 const baseSvgVersion = computed(() => {
   return focusSvgVersion.value || focusIcon.value?.versions.svg[0];
 });
@@ -44,7 +44,16 @@ const waitForImage = (imgElem: HTMLImageElement) =>
 const downloadFile = (dataURL: string, filename: string) => {
   downloadUrl.value = dataURL;
   downloadFileName.value = filename;
-  downloadHref.value?.click();
+
+  const loop = setInterval(() => {
+    if (
+      downloadHref.value?.getAttribute('href') === dataURL &&
+      downloadHref.value?.getAttribute('download') === filename
+    ) {
+      clearInterval(loop);
+      return downloadHref.value?.click();
+    }
+  });
 };
 
 const svgToImgDownload = (ext: string) => {
