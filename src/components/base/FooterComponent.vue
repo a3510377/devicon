@@ -23,6 +23,14 @@ footer {
     margin: 0 auto;
     font-size: 15pt;
     color: #e8eaed;
+
+    @media all and (max-width: 900px) {
+      font-size: 2.2vw;
+    }
+    @media all and (max-width: 300px) {
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   }
 }
 </style>

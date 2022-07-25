@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { ref, watch } from 'vue';
 import { onStartTyping } from '@vueuse/core';
-import { Search } from 'js-search';
+import { Search, AllSubstringsIndexStrategy } from 'js-search';
 
 import { useAppStore } from '@/stores/modules/app';
 import { deviconDataType } from '@/utils/data';
@@ -10,8 +10,9 @@ const inputEl = ref<HTMLInputElement & { active: boolean }>();
 const appStore = useAppStore();
 
 const search = new Search('name');
-search.addIndex('tags');
+search.indexStrategy = new AllSubstringsIndexStrategy();
 search.addIndex('name');
+search.addIndex('tags');
 
 const searchStr = ref('');
 
