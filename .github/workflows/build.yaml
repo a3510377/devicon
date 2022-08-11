@@ -33,7 +33,7 @@ jobs:
           git config --global user.email "$user_email"
           git init
           git add -A
-          git commit -m "${{ github.event.head_commit.message }}"
+          git commit -m "up: ${{ github.event.head_commit.message }}"
           git push -f https://_:"$token"@github.com/${{ github.event.repository.full_name }}.git master:gh-pages
         shell: bash
         env:
