@@ -3,6 +3,7 @@
 import 'vite-ssg';
 import { defineConfig } from 'vite';
 import { fileURLToPath, URL } from 'url';
+import { generateSitemap } from 'sitemap-ts';
 
 import vue from '@vitejs/plugin-vue';
 
@@ -32,5 +33,13 @@ export default defineConfig({
     formatting: 'minify',
     dirStyle: 'nested',
     script: 'async',
+    onFinished() {
+      if (process.env.HOSTNAME) {
+        generateSitemap({
+          hostname: process.env.HOSTNAME,
+          robots: [{ userAgent: '*', allow: '/' }],
+        });
+      }
+    },
   },
 });
