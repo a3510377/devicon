@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import IconsComponent from '@/components/home/IconsComponent.vue';
 import IconInfo from '@/components/home/IconInfo.vue';
-import CustomizationComponent from '@/components/home/CustomizationComponent.vue';
+// import CustomizationComponent from '@/components/home/CustomizationComponent.vue';
 import FooterComponent from '@/components/base/FooterComponent.vue';
 import SearchIcon from '@/components/home/SearchIcon.vue';
 </script>

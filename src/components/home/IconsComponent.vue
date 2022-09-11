@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, reactive, onMounted, watchEffect, ref } from 'vue';
+import { computed, reactive, onMounted, watchEffect } from 'vue';
 import { useMagicKeys } from '@vueuse/core';
 
 import { getDeviconData } from '@/utils/data';
@@ -44,5 +44,8 @@ const iconClick = (name: string) => {
   justify-items: center;
   justify-content: center;
   flex-wrap: wrap;
+  @media all and (max-width: 500px) {
+    grid-template-columns: repeat(auto-fill, 100px);
+  }
 }
 </style>

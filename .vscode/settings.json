@@ -11,5 +11,6 @@
   "eslint.alwaysShowStatus": true,
   "commentTranslate.multiLineMerge": false,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "files.eol": "\n"
+  "files.eol": "\n",
+  "typescript.tsdk": "node_modules/typescript/lib"
 }

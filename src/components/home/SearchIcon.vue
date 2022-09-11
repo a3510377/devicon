@@ -23,7 +23,7 @@ watch(searchStr, (searchStr) => {
   if (!searchStr) return (appStore.nowIcons = appStore.baseIcons);
   const data: Record<string, deviconDataType> = {};
 
-  (<deviconDataType[]>search.search(searchStr)).forEach((item) => {
+  (search.search(searchStr) as deviconDataType[]).forEach((item) => {
     data[item.name] = item;
   });
   appStore.nowIcons = data;

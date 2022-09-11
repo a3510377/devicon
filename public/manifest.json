@@ -4,6 +4,8 @@
   "start_url": "https://a3510377.github.io",
   "theme_color": "#fff",
   "background_color": "#fff",
+  "short_name": "Devicon",
+  "display": "standalone",
   "icons": [
     {
       "src": "./logos/android-chrome-36x36.png",

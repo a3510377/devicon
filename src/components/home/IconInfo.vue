@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { computed, ref, watch } from 'vue';
-import { templateRef } from '@vueuse/core';
+import { templateRef, useSwipe } from '@vueuse/core';
+import { OnClickOutside } from '@vueuse/components';
 
 import { useAppStore } from '@/stores/modules/app';
 import { getSvgURL, getDeviconSvg } from '@/utils/data';
@@ -72,7 +73,7 @@ const svgToImgDownload = (ext: string) => {
   const svgDiv = document.createElement('div');
   document.body.appendChild(svgDiv);
   svgDiv.innerHTML = focusSvg.value;
-  const svg = <SVGSVGElement>svgDiv.querySelector('svg');
+  const svg = svgDiv.querySelector('svg') as SVGSVGElement;
 
   const xmlSerializer = new XMLSerializer();
   const svgStr = xmlSerializer.serializeToString(svg);
@@ -104,89 +105,116 @@ const svgToImgDownload = (ext: string) => {
     })
     .catch(console.error);
 };
+
+const swipeEl = ref<HTMLDivElement>();
+const swipeElBottom = ref<string | undefined>(void 0);
+const swipeElHeight = computed(() => swipeEl.value?.clientHeight || 0);
+const { lengthY } = useSwipe(swipeEl, {
+  passive: false,
+  onSwipe() {
+    swipeElBottom.value =
+      lengthY.value < 0 ? `${-Math.abs(lengthY.value)}px` : void 0;
+  },
+  onSwipeEnd() {
+    if (
+      lengthY.value < 0 &&
+      Math.abs(lengthY.value) / swipeElHeight.value >= 0.2
+    ) {
+      appStore.focusIcon = void 0;
+    }
+    swipeElBottom.value = void 0;
+  },
+});
 </script>
 
 <template>
-  <div v-if="focusIcon" class="icon-info">
-    <div class="font-version">
-      <h1>Font versions</h1>
-      <CodeCopy
-        code="<link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css'>"
-        title="Place this in your header (once per HTML file):"
-      />
-      <br />
-      <ul class="content">
-        <li
-          v-for="(version, index) in makeRepeated(focusIcon.versions.font, 2)"
-          :key="version"
-          :class="{
-            active:
-              focusFontVersion?.join('-') ===
-              [version, index % 2 ? 'colored' : ''].join('-'),
-          }"
-          @click="focusFontVersion = [version, index % 2 ? 'colored' : '']"
-        >
-          <i
+  <OnClickOutside @trigger="appStore.focusIcon = void 0">
+    <div
+      v-if="focusIcon"
+      ref="swipeEl"
+      :style="{ bottom: swipeElBottom }"
+      class="icon-info"
+    >
+      <div class="font-version">
+        <h1>Font versions</h1>
+        <CodeCopy
+          code="<link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css'>"
+          title="Place this in your header (once per HTML file):"
+        />
+        <br />
+        <ul class="content">
+          <li
+            v-for="(version, index) in makeRepeated(focusIcon.versions.font, 2)"
+            :key="version"
             :class="{
-              [`devicon-${focusIcon.name}-${version}`]: true,
-              colored: index % 2,
+              active:
+                focusFontVersion?.join('-') ===
+                [version, index % 2 ? 'colored' : ''].join('-'),
             }"
-          ></i>
-        </li>
-      </ul>
-      <CodeCopy
-        :code="`<i class='devicon-${focusIcon.name}-${focusFontVersion
-          ?.join(' ')
-          .trim()}'></i>`"
-        title="Place this in your body:"
-      />
-    </div>
-    <br />
-    <div class="svg-version">
-      <h1>SVG versions</h1>
-      <ul class="content">
-        <li
-          v-for="version in focusIcon.versions.svg"
-          :key="version"
-          :class="{ active: baseSvgVersion === version }"
-        >
-          <img
-            :alt="focusIcon.name"
-            :src="getSvgURL(focusIcon.name, version)"
-            @click="setFocusSvg(version)"
-          />
-        </li>
-      </ul>
-      <CodeCopy
-        :code="`<img src='${getSvgURL(
-          focusIcon.name,
-          focusSvgVersion || ''
-        )}' />`"
-        title="Using <img /> element:"
-      />
+            @click="focusFontVersion = [version, index % 2 ? 'colored' : '']"
+          >
+            <i
+              :class="{
+                [`devicon-${focusIcon.name}-${version}`]: true,
+                colored: index % 2,
+              }"
+            ></i>
+          </li>
+        </ul>
+        <CodeCopy
+          :code="`<i class='devicon-${focusIcon.name}-${focusFontVersion
+            ?.join(' ')
+            .trim()}'></i>`"
+          title="Place this in your body:"
+        />
+      </div>
       <br />
-      <CodeCopy :code="focusSvg" title="Using Pure SVG:" />
-      <div class="download-buttons">
-        <button
-          v-for="downloadType in ['png', 'jpg', 'webp', 'svg']"
-          :key="downloadType"
-          @click="svgToImgDownload(downloadType)"
-        >
-          <SvgIcon name="file_download" size="20px" color="#fff" />
-          {{ downloadType }}
-        </button>
-        <a
-          ref="download-href"
-          :href="downloadUrl"
-          :download="downloadFileName"
-          hidden
-        ></a>
+      <div class="svg-version">
+        <h1>SVG versions</h1>
+        <ul class="content">
+          <li
+            v-for="version in focusIcon.versions.svg"
+            :key="version"
+            :class="{ active: baseSvgVersion === version }"
+          >
+            <img
+              :alt="focusIcon.name"
+              :src="getSvgURL(focusIcon.name, version)"
+              @click="setFocusSvg(version)"
+            />
+          </li>
+        </ul>
+        <CodeCopy
+          :code="`<img src='${getSvgURL(
+            focusIcon.name,
+            focusSvgVersion || ''
+          )}' />`"
+          title="Using <img /> element:"
+        />
+        <br />
+        <CodeCopy :code="focusSvg" title="Using Pure SVG:" />
+        <div class="download-buttons">
+          <button
+            v-for="downloadType in ['png', 'jpg', 'webp', 'svg']"
+            :key="downloadType"
+            @click="svgToImgDownload(downloadType)"
+          >
+            <SvgIcon name="file_download" size="20px" color="#fff" />
+            {{ downloadType }}
+          </button>
+          <a
+            ref="download-href"
+            :href="downloadUrl"
+            :download="downloadFileName"
+            hidden
+          ></a>
+        </div>
+      </div>
+      <div class="close-btn" @click="appStore.focusIcon = void 0">
+        <SvgIcon name="close" size="24px" />
       </div>
     </div>
-    <div class="close-btn" @click="appStore.focusIcon = void 0">
-      <SvgIcon name="close" size="24px" />
-    </div>
-  </div>
+  </OnClickOutside>
 </template>
 
 <style lang="scss" scoped>
