@@ -64,7 +64,7 @@ onStartTyping(() => {
   display: flex;
   width: 100%;
   padding: 20px;
-  margin: 2em 0;
+  margin-bottom: 2em;
   background-color: #fff;
   border-radius: 15px;
   box-shadow: 0 0 90px 6px #a1a1a151;
@@ -89,6 +89,10 @@ onStartTyping(() => {
     &:focus {
       border: 1px solid #06f;
     }
+  }
+
+  @media all and (max-width: 1200px) {
+    border-radius: initial;
   }
 }
 </style>
