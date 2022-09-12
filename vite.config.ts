@@ -37,7 +37,6 @@ export default defineConfig({
     dirStyle: 'nested',
     script: 'async',
     async onFinished() {
-      process.env.HOSTNAME = 'https://test/devicon';
       if (process.env.HOSTNAME) {
         const smStream = new SitemapStream({
           hostname: process.env.HOSTNAME,
@@ -65,7 +64,7 @@ export default defineConfig({
         smStream.pipe(createWriteStream('./dist/image-sitemap.xml'));
 
         smStream.write({
-          url: '/',
+          url: process.env.HOSTNAME,
           changefreq: 'daily',
           priority: 1,
           img: images,
