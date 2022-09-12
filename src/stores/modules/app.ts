@@ -13,5 +13,7 @@ export const useAppStore = defineStore({
   state: (): AppStoreType => ({
     colored: true,
     baseIcons: {},
+    focusIcon: void 0,
+    nowIcons: void 0,
   }),
 });

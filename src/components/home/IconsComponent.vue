@@ -19,8 +19,7 @@ watchEffect(() => {
 });
 
 const iconClick = (name: string) => {
-  if (appStore.focusIcon?.name === name) appStore.focusIcon = void 0;
-  else appStore.focusIcon = deviconData.value[name];
+  appStore.focusIcon = deviconData.value[name];
 };
 </script>
 
