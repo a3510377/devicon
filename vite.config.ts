@@ -5,7 +5,7 @@ import { createWriteStream } from 'fs';
 
 import 'vite-ssg';
 import { defineConfig } from 'vite';
-import { SitemapStream, streamToPromise } from 'sitemap';
+import { SitemapStream } from 'sitemap';
 
 import vue from '@vitejs/plugin-vue';
 
