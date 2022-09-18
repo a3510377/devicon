@@ -61,8 +61,7 @@ export default defineConfig({
             });
         });
 
-        smStream.pipe(createWriteStream('./dist/image-sitemap.xml'));
-
+        smStream.pipe(createWriteStream('./dist/sitemap.xml'));
         smStream.write({
           url: process.env.HOSTNAME,
           changefreq: 'daily',
