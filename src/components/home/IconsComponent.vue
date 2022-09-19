@@ -25,8 +25,12 @@ onMounted(() => {
           {
             '@context': 'https://schema.org',
             '@type': 'Organization',
+            name: 'Devicon',
             url: 'https://a3510377.github.io/devicon/',
             logo: 'https://a3510377.github.io/devicon/logos/mstile-144x144.png',
+            image: [
+              'https://a3510377.github.io/devicon/logos/mstile-144x144.png',
+            ],
           },
           ...Object.values(deviconData.value).map((img) => ({
             '@context': 'https://schema.org/',
