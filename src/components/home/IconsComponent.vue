@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, reactive, onMounted, watchEffect } from 'vue';
 import { useMagicKeys } from '@vueuse/core';
+import { useHead } from '@vueuse/head';
 
 import { getDeviconData, getSvgURL } from '@/utils/data';
 import { useAppStore } from '@/stores/modules/app';
@@ -9,33 +10,38 @@ import IconsComponent from './IconComponent.vue';
 
 const { escape } = useMagicKeys();
 
-const scriptEl = document.createElement('script');
 const appStore = useAppStore();
 const fetchDeviconData = reactive(await getDeviconData());
 const deviconData = computed(() => appStore.nowIcons || fetchDeviconData);
 
-onMounted(() => Object.assign(appStore.baseIcons, fetchDeviconData));
+onMounted(() => {
+  Object.assign(appStore.baseIcons, fetchDeviconData);
+
+  useHead({
+    script: [
+      {
+        type: 'application/ld+json',
+        children: JSON.stringify([
+          {
+            '@context': 'https://schema.org',
+            '@type': 'Organization',
+            url: 'https://a3510377.github.io/devicon/',
+            logo: 'https://a3510377.github.io/devicon/logos/mstile-144x144.png',
+          },
+          ...Object.values(deviconData.value).map((img) => ({
+            '@context': 'https://schema.org/',
+            '@type': 'ImageObject',
+            license: 'https://github.com/devicons/devicon',
+            contentUrl: getSvgURL(img.name, img.versions.svg?.[0] || ''),
+            acquireLicensePage: 'https://github.com/devicons/devicon',
+          })),
+        ]),
+      },
+    ],
+  });
+});
 watchEffect(() => {
   if (escape.value) appStore.focusIcon = void 0;
-  if (deviconData.value) {
-    scriptEl.setAttribute('type', 'application/ld+json');
-    scriptEl.textContent = JSON.stringify([
-      {
-        '@context': 'https://schema.org',
-        '@type': 'Organization',
-        url: 'https://a3510377.github.io/devicon/',
-        logo: 'https://a3510377.github.io/devicon/logos/mstile-144x144.png',
-      },
-      ...Object.values(deviconData.value).map((img) => ({
-        '@context': 'https://schema.org/',
-        '@type': 'ImageObject',
-        license: 'https://github.com/devicons/devicon',
-        contentUrl: getSvgURL(img.name, img.versions.svg?.[0] || ''),
-        acquireLicensePage: 'https://github.com/devicons/devicon',
-      })),
-    ]);
-    document.head.appendChild(scriptEl);
-  }
 });
 
 const iconClick = (name: string) => {
