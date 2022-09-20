@@ -66,6 +66,11 @@ export default defineConfig({
           url: process.env.HOSTNAME,
           changefreq: 'daily',
           priority: 1,
+        });
+        smStream.write({
+          url: process.env.HOSTNAME,
+          changefreq: 'daily',
+          priority: 1,
           img: images,
         });
 
