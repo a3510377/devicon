@@ -11,7 +11,9 @@ const appStore = useAppStore();
 
 const search = new Search('name');
 search.indexStrategy = new AllSubstringsIndexStrategy();
+
 search.addIndex('name');
+search.addIndex('altnames');
 search.addIndex('tags');
 
 const searchStr = ref('');
