@@ -23,7 +23,7 @@ const appStore = useAppStore();
 <style lang="scss" scoped>
 .icon {
   display: flex;
-  align-items: center;
+  justify-content: center;
   flex-direction: column;
   width: 120px;
   height: 120px;
