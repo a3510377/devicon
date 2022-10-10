@@ -8,10 +8,7 @@ const appStore = useAppStore();
 </script>
 
 <template>
-  <button
-    class="icon"
-    :class="{ active: appStore.focusIcon?.name === icon.name }"
-  >
+  <li class="icon" :class="{ active: appStore.focusIcon?.name === icon.name }">
     <i
       class="cbp-ig-icon"
       :class="{
@@ -20,11 +17,14 @@ const appStore = useAppStore();
       }"
     ></i>
     <h3 v-text="icon.name"></h3>
-  </button>
+  </li>
 </template>
 
 <style lang="scss" scoped>
 .icon {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
   width: 120px;
   height: 120px;
   text-align: center;

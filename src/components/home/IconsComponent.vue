@@ -54,19 +54,20 @@ const iconClick = (name: string) => {
 </script>
 
 <template>
-  <div class="icons">
+  <ul class="icons">
     <IconsComponent
       v-for="(icon, name) in deviconData"
       :key="name"
       :icon="icon"
       @click="iconClick(name)"
     />
-  </div>
+  </ul>
 </template>
 
 <style lang="scss" scoped>
 .icons {
   display: grid;
+  list-style-type: none;
   grid-template-columns: repeat(auto-fill, 120px);
   column-gap: 16px;
   row-gap: 24px;
