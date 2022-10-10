@@ -32,13 +32,14 @@ onMounted(() => {
               'https://a3510377.github.io/devicon/logos/mstile-144x144.png',
             ],
           },
-          ...Object.values(deviconData.value).map((img) => ({
-            '@context': 'https://schema.org/',
-            '@type': 'ImageObject',
-            license: 'https://github.com/devicons/devicon',
-            contentUrl: getSvgURL(img.name, img.versions.svg?.[0] || ''),
-            acquireLicensePage: 'https://github.com/devicons/devicon',
-          })),
+          // fix: https://support.google.com/webmasters/answer/7440203#discovered__unclear_status
+          // ...Object.values(deviconData.value).map((img) => ({
+          //   '@context': 'https://schema.org/',
+          //   '@type': 'ImageObject',
+          //   license: 'https://github.com/devicons/devicon',
+          //   contentUrl: getSvgURL(img.name, img.versions.svg?.[0] || ''),
+          //   acquireLicensePage: 'https://github.com/devicons/devicon',
+          // })),
         ]),
       },
     ],
